@@ -6,8 +6,8 @@ spring:
     config:
       server:
         git:
-          default-label: main
-          uri: https://github.com/daytolp/microservicios-transportes.git
+          default-label: master
+          uri: https://github.com/daytolp/micrioservicios-transportes-02.git
           search-paths: config-data
   application:
     name: config-service
