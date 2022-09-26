@@ -7,10 +7,9 @@ spring:
       uri: http://localhost:8081
   security:
     oauth2:
-      resourcerserver:
+      resourceserver:
         jwt:
           issuer-uri: http://localhost:8180/auth/realms/tutorial-realm
-
 
 
 # To See H2 Console in Browser:
