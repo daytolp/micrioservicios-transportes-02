@@ -5,6 +5,11 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8081
+  security:
+    oauth2:
+      resourcerserver:
+        jwt:
+          issuer-uri: http://localhost:8180/auth/realms/tutorial-realm
 
 
 
