@@ -6,7 +6,7 @@ spring:
     config:
       server:
         git:
-          default-label: main
+          default-label: auth-jwt
           uri: https://github.com/daytolp/micrioservicios-transportes-02.git
           search-paths: config-data
   application:

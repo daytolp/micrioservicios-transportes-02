@@ -46,20 +46,14 @@ public class UserService {
         return userNew;
     }
 
-    public List getCars(Integer userId) {
-        Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", "Bearer " + jwt.getTokenValue());
-        ResponseEntity<List>  cars = this.restTemplate.exchange("http://car-service/car/byuser/" +userId, HttpMethod.GET, new HttpEntity<>(httpHeaders), List.class);
-        return  cars.getBody();
+    public List<Car> getCars(Integer userId) {
+        List<Car>  cars = this.restTemplate.getForObject("http://car-service/car/byuser/" +userId, List.class);
+        return  cars;
     }
 
-    public List getBikes(Integer userId) {
-        Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", "Bearer " + jwt.getTokenValue());
-        ResponseEntity<List> bikes = this.restTemplate.exchange("http://bike-service/bike/byuser/" +userId, HttpMethod.GET, new HttpEntity<>(httpHeaders), List.class);
-        return  bikes.getBody();
+    public List<Bike> getBikes(Integer userId) {
+        List<Bike> bikes = this.restTemplate.getForObject("http://bike-service/bike/byuser/" +userId, List.class);
+        return  bikes;
     }
 
     public Car saveCar(Integer userId, Car car) {
