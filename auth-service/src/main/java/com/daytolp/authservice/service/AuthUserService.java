@@ -2,6 +2,8 @@ package com.daytolp.authservice.service;
 
 
 import com.daytolp.authservice.dto.AuthUserDto;
+import com.daytolp.authservice.dto.NewUserDto;
+import com.daytolp.authservice.dto.RequestDto;
 import com.daytolp.authservice.dto.TokenDto;
 import com.daytolp.authservice.entity.AuthUser;
 import com.daytolp.authservice.repository.AuthUserRepository;
@@ -24,7 +26,7 @@ public class AuthUserService {
     @Autowired
     JwtProvider jwtProvider;
 
-    public AuthUser save(AuthUserDto dto) {
+    public AuthUser save(NewUserDto dto) {
         Optional<AuthUser> user = authUserRepository.findByUserName(dto.getUserName());
         if(user.isPresent())
             return null;
@@ -32,6 +34,7 @@ public class AuthUserService {
         AuthUser authUser = AuthUser.builder()
                 .userName(dto.getUserName())
                 .password(password)
+                .role(dto.getRole())
                 .build();
         return authUserRepository.save(authUser);
     }
@@ -45,8 +48,8 @@ public class AuthUserService {
         return null;
     }
 
-    public TokenDto validate(String token) {
-        if(!jwtProvider.validate(token))
+    public TokenDto validate(String token, RequestDto requestDto) {
+        if(!jwtProvider.validate(token, requestDto))
             return null;
         String username = jwtProvider.getUserNameFromToken(token);
         if(!authUserRepository.findByUserName(username).isPresent())

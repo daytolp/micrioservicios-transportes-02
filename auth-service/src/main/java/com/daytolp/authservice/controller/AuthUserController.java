@@ -2,6 +2,8 @@ package com.daytolp.authservice.controller;
 
 
 import com.daytolp.authservice.dto.AuthUserDto;
+import com.daytolp.authservice.dto.NewUserDto;
+import com.daytolp.authservice.dto.RequestDto;
 import com.daytolp.authservice.dto.TokenDto;
 import com.daytolp.authservice.entity.AuthUser;
 import com.daytolp.authservice.service.AuthUserService;
@@ -25,15 +27,15 @@ public class AuthUserController {
     }
 
     @PostMapping("/validate")
-    public ResponseEntity<TokenDto> validate(@RequestParam String token) {
-        TokenDto tokenDto = authUserService.validate(token);
+    public ResponseEntity<TokenDto> validate(@RequestParam String token, @RequestParam RequestDto requestDto) {
+        TokenDto tokenDto = authUserService.validate(token, requestDto);
         if (tokenDto == null)
             return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(tokenDto);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<AuthUser> create(@RequestBody AuthUserDto dto) {
+    public ResponseEntity<AuthUser> create(@RequestBody NewUserDto dto) {
         AuthUser authUser = authUserService.save(dto);
         if (authUser == null)
             return ResponseEntity.badRequest().build();

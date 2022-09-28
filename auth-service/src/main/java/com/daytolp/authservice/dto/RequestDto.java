@@ -1,5 +1,6 @@
 package com.daytolp.authservice.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class AuthUserDto {
+public class RequestDto {
 
-    private String userName;
-    private String password;
-    private String role;
+    private String uri;
+    private String method;
+
 }
